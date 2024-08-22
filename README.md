@@ -22,16 +22,17 @@ After running `pnpm install`, please take a look at the `package.json` to see wh
 
 The following table describes the business process of this simplified blockchain:
 
-| Function Name            | Visibility | Parameters                                                             | Returns          | Payable | Description                                                                                                                |
-| ------------------------ | ---------- | ---------------------------------------------------------------------- | ---------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `constructor`            | public     | None                                                                   | None             | No      | Initializes the contract by setting the `producerAddress` to the address that deployed the contract.                       |
-| `addTrack`               | external   | `_title: string`, `_artist: string`, `_price: uint256`                 | `Track memory`   | No      | Adds a new track to the system. Can only be called by the producer.                                                        |
-| `updateTrack`            | external   | `_id: uint256`, `_title: string`, `_artist: string`, `_price: uint256` | `Track memory`   | No      | Updates the details of an existing track. Can only be called by the producer.                                              |
-| `deleteTrack`            | external   | `_id: uint256`                                                         | None             | No      | Deletes a track from the system. Can only be called by the producer.                                                       |
-| `getTrack`               | external   | `_id: uint256`                                                         | `Track memory`   | No      | Retrieves a track's details by its ID.                                                                                     |
-| `getTracks`              | external   | `_start: uint256`, `_end: uint256`                                     | `Track[] memory` | No      | Retrieves a list of tracks between the specified start and end indices.                                                    |
-| `sendPurchaseRequest`    | external   | `_trackId: uint256`                                                    | `uint256`        | No      | Submits a purchase request for a specific track. Can only be called by non-producer addresses. Returns the transaction ID. |
-| `approvePurchaseRequest` | external   | `_transactionId: uint256`                                              | None             | No      | Approves a purchase request. Can only be called by the producer.                                                           |
+| Function Name            | Parameters                                                             | Description                                                                                                                                |
+| ------------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `constructor`            | None                                                                   | Initializes the contract by setting the `producerAddress` to the address that deployed the contract.                                       |
+| `addTrack`               | `_title: string`, `_artist: string`, `_price: uint256`                 | Adds a new track to the system. Can only be called by the producer.                                                                        |
+| `updateTrack`            | `_id: uint256`, `_title: string`, `_artist: string`, `_price: uint256` | Updates the details of an existing track. Can only be called by the producer.                                                              |
+| `deleteTrack`            | `_id: uint256`                                                         | Deletes a track from the system. Can only be called by the producer.                                                                       |
+| `getTrack`               | `_id: uint256`                                                         | Retrieves a track's details by its ID.                                                                                                     |
+| `getTracks`              | `_start: uint256`, `_end: uint256`                                     | Retrieves a list of tracks between the specified start and end indices.                                                                    |
+| `sendPurchaseRequest`    | `_trackId: uint256`                                                    | Submits a purchase request for a specific track. Can only be called by non-producer addresses. Returns the transaction ID.                 |
+| `approvePurchaseRequest` | `_transactionId: uint256`                                              | Approves a purchase request. Can only be called by the producer.                                                                           |
+| `finishPurchaseRequest`  | `_transactionId: uint256`                                              | Completes the payment for a purchase request. Can only be called by the customer who initiated the request. Sends payment to the producer. |
 
 ## Contract Overview
 
