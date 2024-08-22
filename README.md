@@ -22,17 +22,16 @@ After running `pnpm install`, please take a look at the `package.json` to see wh
 
 The following table describes the business process of this simplified blockchain:
 
-| Function Name            | Description                                                                                | Payable |
-| ------------------------ | ------------------------------------------------------------------------------------------ | ------- |
-| `constructor`            | Initializes the contract with the producer's address.                                      | No      |
-| `addTrack`               | Adds a new track to the system.                                                            | No      |
-| `updateTrack`            | Updates an existing track's details.                                                       | No      |
-| `deleteTrack`            | Deletes a track from the system.                                                           | No      |
-| `getTrack`               | Retrieves details of a specific track.                                                     | No      |
-| `getTracks`              | Retrieves a list of tracks within a specified range.                                       | No      |
-| `sendPurchaseRequest`    | Allows customers to submit a purchase request for a track.                                 | No      |
-| `approvePurchaseRequest` | Allows the producer to approve a customer's purchase request.                              | No      |
-| `finishPurchaseRequest`  | Finalizes the purchase by handling the payment and transferring the funds to the producer. | Yes     |
+| Function Name            | Visibility | Parameters                                                             | Returns          | Payable | Description                                                                                                                |
+| ------------------------ | ---------- | ---------------------------------------------------------------------- | ---------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `constructor`            | public     | None                                                                   | None             | No      | Initializes the contract by setting the `producerAddress` to the address that deployed the contract.                       |
+| `addTrack`               | external   | `_title: string`, `_artist: string`, `_price: uint256`                 | `Track memory`   | No      | Adds a new track to the system. Can only be called by the producer.                                                        |
+| `updateTrack`            | external   | `_id: uint256`, `_title: string`, `_artist: string`, `_price: uint256` | `Track memory`   | No      | Updates the details of an existing track. Can only be called by the producer.                                              |
+| `deleteTrack`            | external   | `_id: uint256`                                                         | None             | No      | Deletes a track from the system. Can only be called by the producer.                                                       |
+| `getTrack`               | external   | `_id: uint256`                                                         | `Track memory`   | No      | Retrieves a track's details by its ID.                                                                                     |
+| `getTracks`              | external   | `_start: uint256`, `_end: uint256`                                     | `Track[] memory` | No      | Retrieves a list of tracks between the specified start and end indices.                                                    |
+| `sendPurchaseRequest`    | external   | `_trackId: uint256`                                                    | `uint256`        | No      | Submits a purchase request for a specific track. Can only be called by non-producer addresses. Returns the transaction ID. |
+| `approvePurchaseRequest` | external   | `_transactionId: uint256`                                              | None             | No      | Approves a purchase request. Can only be called by the producer.                                                           |
 
 ## Contract Overview
 
