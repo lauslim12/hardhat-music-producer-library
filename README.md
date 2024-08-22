@@ -1,4 +1,4 @@
-# Hardhat Producer Library
+# Hardhat Music Producer Library
 
 This project demonstrates a sample use-case on the Ethereum blockchain, focusing on a simplified model of a music producer's library. The producer can add, update, and manage music tracks, while customers can purchase these tracks through a decentralized application.
 
